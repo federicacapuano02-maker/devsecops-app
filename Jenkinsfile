@@ -26,16 +26,15 @@ pipeline {
         }
 
         stage('SAST - Snyk') {
-    steps {
-        withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
-            sh '''
-                pip install snyk
-                snyk auth $SNYK_TOKEN
-                snyk test || true
-            '''
+            steps {
+                withCredentials([string(credentialsId: 'SNYK_TOKEN', variable: 'SNYK_TOKEN')]) {
+                    sh '''
+                        pip install snyk
+                        snyk auth $SNYK_TOKEN
+                        snyk test || true
+                    '''
+                }
+            }
         }
-    }
-}
-
     }
 }
